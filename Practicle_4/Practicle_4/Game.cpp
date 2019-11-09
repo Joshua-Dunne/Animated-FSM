@@ -62,6 +62,7 @@ void Game::update()
 
 void Game::draw()
 {
-	window.clear();
+	window.clear(sf::Color::White);
+	fsm.drawAnim(window);
 	window.display();
 }
