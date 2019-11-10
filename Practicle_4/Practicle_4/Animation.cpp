@@ -11,6 +11,9 @@ Animation::Animation() : m_current{ new Idle() }, m_previous{ new Idle() }
 
 }
 
+/// <summary>
+/// Initialize Animation frames
+/// </summary>
 void Animation::initAnimations()
 {
 	sf::IntRect m_idleRect{ 0,0,100,200 };
@@ -60,9 +63,12 @@ void Animation::initAnimations()
 	m_currentAnim = &m_idleAnim;
 }
 
+/// <summary>
+/// Move to Idle state
+/// </summary>
 void Animation::idle()
 {
-	if (!startedJump)
+	if (!startedJump) // as long as a jump hasn't started, we can go to idle
 	{
 		m_current->idle(this);
 		m_currentAnim = &m_idleAnim;
@@ -70,9 +76,12 @@ void Animation::idle()
 	
 }
 
+/// <summary>
+/// Move to jumping state
+/// </summary>
 void Animation::jumping()
 {
-	if (!startedJump)
+	if (!startedJump) // as long as a jump hasn't already started, we can jump
 	{
 		m_previous = m_current;
 		m_current->jumping(this);
@@ -82,72 +91,90 @@ void Animation::jumping()
 	}
 }
 
+/// <summary>
+/// Move to climbing state
+/// </summary>
 void Animation::climbing()
 {
 	m_current->climbing(this);
 	m_currentAnim = &m_climbAnim;
 }
 
+/// <summary>
+/// Move to falling state
+/// </summary>
 void Animation::falling()
 {
 	m_current->falling(this);
 	m_currentAnim = &m_fallAnim;
 }
 
+/// <summary>
+/// Move to walking state
+/// </summary>
 void Animation::walking()
 {
 	m_current->walking(this);
 	m_currentAnim = &m_walkAnim;
 }
 
+/// <summary>
+/// Move to landing state
+/// </summary>
 void Animation::landing()
 {
 	m_current->landing(this);
 	m_currentAnim = &m_landAnim;
 }
 
+/// <summary>
+/// Control timers for falling, landing and waiting to go to idle
+/// </summary>
 void Animation::update()
 {
 	if (fallingTimer > 0)
 	{
-		fallingTimer--;
+		fallingTimer--; // decrease falling timer
 	}
 
 	if (landingTimer > 0)
 	{
-		landingTimer--;
+		landingTimer--; // decrease landing timer
 	}
 
 	if (idleTimer > 0)
 	{
-		idleTimer--;
+		idleTimer--; // decrease idle timer
 	}
 
-	if (fallingTimer == 1)
+	if (fallingTimer == 1) // go to falling when finished jumping
 	{
 		falling();
 		fallingTimer = 0;
 		landingTimer = STARTING_TIME;
 	}
 
-	if (landingTimer == 1)
+	if (landingTimer == 1) // go to landing when finished falling
 	{
 		landing();
-		//m_current = m_previous;
 		landingTimer = 0;
 		idleTimer = STARTING_TIME;
 		startedJump = false;
 	}
 
-	if (idleTimer == 1)
+	if (idleTimer == 1) // go back to idle whe finished landing
 	{
 		idle();
 		idleTimer = 0;
 	}
 
-	m_currentAnim->update();
+	m_currentAnim->update(); // update frames
 }
 
+/// <summary>
+/// Draws the animation
+/// </summary>
+/// <param name="t_window">Window to draw</param>
 void Animation::drawAnim(sf::RenderWindow& t_window)
 {
 	t_window.draw(*m_currentAnim);

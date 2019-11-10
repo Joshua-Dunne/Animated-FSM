@@ -1,8 +1,8 @@
 /// <summary>
 /// Joshua Dunne
 /// C00241588
-/// Date(s): 04/11/19, 05/11/19
-/// Time Taken: ~2 hours
+/// Date(s): 04/11/19, 05/11/19, 10/11/19
+/// Time Taken: ~7 hours
 /// Estimated time: 6 hours
 /// </summary>
 
@@ -35,23 +35,24 @@ void Game::update()
 			window.close();
 			break;
 		case sf::Event::KeyPressed:
-			if (event.key.code == sf::Keyboard::Left)
+			if (event.key.code == sf::Keyboard::X)
 			{
-				fsm.jumping();
+				fsm.jumping(); // jump if X is pressed
 			}
 			
-			if (event.key.code == sf::Keyboard::Right)
+			if (event.key.code == sf::Keyboard::Right
+				|| event.key.code == sf::Keyboard::Left)
 			{
-				fsm.walking();
+				fsm.walking(); // walk if Left or Right is pressed
 			}
 
 			if (event.key.code == sf::Keyboard::Up)
 			{
-				fsm.climbing();
+				fsm.climbing(); // climb if Up is pressed
 			}
 			break;
 		default:
-			fsm.idle();
+			fsm.idle(); // if nothing else is currently happening, idle
 			break;
 		}
 

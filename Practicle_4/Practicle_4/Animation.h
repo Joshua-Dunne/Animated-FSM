@@ -42,9 +42,7 @@ public:
 	int idleTimer{ 0 };
 	bool startedJump{ false };
 
-	sf::Sprite m_playerSprite;
 	sf::Texture m_playerTex;
-
 	AnimatedSprite m_idleAnim;
 	AnimatedSprite m_walkAnim;
 	AnimatedSprite m_jumpAnim;
