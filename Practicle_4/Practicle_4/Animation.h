@@ -7,6 +7,7 @@
 #include "Falling.h"
 #include "Walking.h"
 #include "Landing.h"
+#include "AnimatedSprite.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -16,6 +17,9 @@ class Animation
 	class State* m_previous;
 public:
 	Animation();
+
+	void initAnimations();
+
 	void setCurrent(State* s) { m_current = s; };
 	void setPrevious(State* s) { m_previous = s; };
 	State* getCurrent(){ return m_current; };
@@ -30,7 +34,8 @@ public:
 	void update();
 	void drawAnim(sf::RenderWindow & t_window);
 
-	const int STARTING_TIME = 60;
+
+	const int STARTING_TIME = 3;
 
 	int fallingTimer{ 0 };
 	int landingTimer{ 0 };
@@ -40,11 +45,15 @@ public:
 	sf::Sprite m_playerSprite;
 	sf::Texture m_playerTex;
 
-	sf::IntRect m_idleRect{ 0,0,100,200 };
-	sf::IntRect m_walkRect{ 100,0,100,200 };
-	sf::IntRect m_jumpRect{ 200,0,100,200 };
-	sf::IntRect m_fallRect{ 300,0,100,200 };
-	sf::IntRect m_landRect{ 400,0,100,200 };
-	sf::IntRect m_climbRect{ 500,0,100,200 };
+	AnimatedSprite m_idleAnim;
+	AnimatedSprite m_walkAnim;
+	AnimatedSprite m_jumpAnim;
+	AnimatedSprite m_fallAnim;
+	AnimatedSprite m_landAnim;
+	AnimatedSprite m_climbAnim;
+
+	AnimatedSprite* m_currentAnim;
+
+	
 };
 

@@ -57,7 +57,12 @@ void Game::update()
 
 	}
 
-	fsm.update();
+	if (m_clock.getElapsedTime() > seconds(0.5f))
+	{
+		fsm.update();
+		m_clock.restart();
+	}
+	
 }
 
 void Game::draw()

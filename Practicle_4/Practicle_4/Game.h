@@ -14,6 +14,7 @@ public:
 	void draw();
 
 	Animation fsm;
+	sf::Clock m_clock;
 
 	sf::RenderWindow window;
 

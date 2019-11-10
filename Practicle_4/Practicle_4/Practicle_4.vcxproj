@@ -125,8 +125,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Climbing.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="Falling.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Idle.h" />
@@ -136,6 +138,7 @@
     <ClInclude Include="Walking.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Climbing.cpp" />
     <ClCompile Include="Falling.cpp" />
