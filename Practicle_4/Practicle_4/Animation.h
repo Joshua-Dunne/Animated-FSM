@@ -35,7 +35,7 @@ public:
 	void drawAnim(sf::RenderWindow & t_window);
 
 
-	const int STARTING_TIME = 3;
+	const int STARTING_TIME = 2;
 
 	int fallingTimer{ 0 };
 	int landingTimer{ 0 };

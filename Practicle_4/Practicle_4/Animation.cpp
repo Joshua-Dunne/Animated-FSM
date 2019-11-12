@@ -147,25 +147,25 @@ void Animation::update()
 		idleTimer--; // decrease idle timer
 	}
 
-	if (fallingTimer == 1) // go to falling when finished jumping
+	if (fallingTimer == 0) // go to falling when finished jumping
 	{
 		falling();
-		fallingTimer = 0;
+		fallingTimer = -1;
 		landingTimer = STARTING_TIME;
 	}
 
-	if (landingTimer == 1) // go to landing when finished falling
+	if (landingTimer == 0) // go to landing when finished falling
 	{
 		landing();
-		landingTimer = 0;
+		landingTimer = -1;
 		idleTimer = STARTING_TIME;
 		startedJump = false;
 	}
 
-	if (idleTimer == 1) // go back to idle whe finished landing
+	if (idleTimer == 0) // go back to idle whe finished landing
 	{
+		idleTimer = -1;
 		idle();
-		idleTimer = 0;
 	}
 
 	m_currentAnim->update(); // update frames
